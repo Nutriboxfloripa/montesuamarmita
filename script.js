@@ -1,5 +1,5 @@
 function calculateTotal() {
-    const pricePerKg = [28.35, 26, 31, 10, 10, 2.6, 2.6, 4, 6.87, 5.67, 14.95]; // Preços por kg dos produtos
+    const pricePerKg = [80, 75, 110, 70, 70, 40, 40, 40, 40, 40, 60]; 
     const quantities = [
         document.getElementById('quantity1').value,
         document.getElementById('quantity2').value,
@@ -44,10 +44,10 @@ function calculateTotal() {
         totalCost = 0;
     }
 
-    const fixedTax = 3.21;
-    const variableCosts = totalCost * 0.12;
+    const fixedTax = 0.00;
+    const variableCosts = totalCost * 0.00;
     const totalWithCosts = totalCost + fixedTax + variableCosts;
-    const profit = totalWithCosts * 0.90;
+    const profit = totalWithCosts * 0.00;
     let finalCost = totalWithCosts + profit;
 
     if (totalGrams < 250 || totalGrams > 450 || !hasGroup1 || !hasGroup2 || marmitaQuantity == 0) {
