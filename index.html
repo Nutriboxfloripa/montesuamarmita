@@ -87,14 +87,6 @@
             </div>
             <p>Total: R$ <span id="finalCost">0.00</span></p>
             <button id="addButton" onclick="addItem()">Adicionar</button>
-            <div class="descontoInf">
-                <p>Descontos:</p>
-                <ul>
-                    <li>5 Marmitas = 5% off</li>
-                    <li>10 Marmitas = 10% off</li>
-                </ul>
-                <p>Consulte taxa de entrega</p>
-            </div>
         </div>
 
         <div class="order-summary" id="orderSummary">
@@ -103,6 +95,15 @@
             <p>Total de Itens: <span id="totalItems">0</span></p>
             <p>Valor Total: R$ <span id="totalValue">0.00</span></p>
             <button onclick="sendOrder()">Realizar Pedido</button>
+            <div class="descontoInf">
+                <p>Descontos:</p>
+                <ul>
+                    <li>5 Marmitas = 5% off</li>
+                    <li>10 Marmitas = 10% off</li>
+                    <li>Descontos aplicados ao finalizar o pedido.</li>
+                </ul>
+                <p>Consulte taxa de entrega</p>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
