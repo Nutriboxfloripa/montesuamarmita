@@ -279,9 +279,9 @@ function clearInputs() {
 
 function applyDiscount(totalValue, totalItems) {
     let discount = 0;
-    if (totalItems >= 14) {
+    if (totalItems >= 10) {
         discount = 0.10;
-    } else if (totalItems >= 7) {
+    } else if (totalItems >= 5) {
         discount = 0.05;
     }
     return Math.max(totalValue * (1 - discount), 0);
