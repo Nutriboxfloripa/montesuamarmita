@@ -124,6 +124,8 @@ label, p {
     font-size: 0.9em;
     margin: 10px 10px;
     font-weight: 900;
+}
+label {
     text-align: left;
 }
 .calc {
