@@ -124,6 +124,7 @@ label, p {
     font-size: 0.9em;
     margin: 10px 10px;
     font-weight: 900;
+        text-align: left;
 }
 .calc {
     border: 1px solid var(--border-color);
@@ -156,7 +157,7 @@ select {
     margin: 2px;
     display: flex;
     justify-content: space-between;
-    align-items: right;
+    align-items: center;
 }
 .Quantidade {
     text-align: center;
