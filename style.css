@@ -156,7 +156,7 @@ select {
     margin: 2px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: right;
 }
 .Quantidade {
     text-align: center;
