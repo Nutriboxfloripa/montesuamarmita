@@ -21,19 +21,19 @@
 }
 .light {
     --text-color: #000000;
-    --bg-url: #D0DEC4;
-    --background-color: rgba(255, 255, 255, 0.774);
-    --border-color: rgb(119, 119, 119);
+    --bg-url: #d1dec4;
+    --background-color: rgba(164, 172, 158, 0.774);
+    --border-color: rgb(17, 9, 9);
     --border-color2: rgba(0, 0, 0, 1);
-    --input-color: rgb(255, 255, 255);
+    --input-color: rgb(187, 228, 182);
     --descontoInf-color: rgb(255, 255, 255);
     --descontoInf-color2: rgba(209, 208, 208, 0.479);
-    --button-color: #6B7D5C;
+    --button-color: #709156;
     --surface-color: rgba(0, 0, 0, 0.08);
     --surface-color-hover: rgba(0, 0, 0, 0.05);
     --switch-bg-url: url(./assets/Son.svg);
     --bg-hover-button: #aeca96;
-    --background-color2: rgba(221, 221, 221, 0.774);
+    --background-color2: rgba(183, 197, 168, 0.774);
 }
 #switch {
     position: relative;
@@ -76,6 +76,8 @@
 
 .title1{
     font-size: 11px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 body {
     background: var(--bg-url) center/cover;
@@ -111,8 +113,15 @@ body {
     padding: 10px;
     border-radius: 15px;
 }
+.base2 {
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
 label, p {
-    font-size: 1.4em;
+    font-size: 0.9em;
     margin: 10px 10px;
     font-weight: 900;
 }
@@ -126,7 +135,7 @@ label, p {
     border-radius: 15px;
 }
 input {
-    font-size: 1.6em;
+    font-size: 1em;
     margin-right: 8px;
     padding: 5px;
     width: 80px;
@@ -135,7 +144,7 @@ input {
     border-radius: 5px;
 }
 select {
-    font-size: 1em;
+    font-size: 0.9em;
     padding: 5px;
     width: 110px;
     background-color: var(--input-color);
@@ -160,7 +169,9 @@ select {
     padding: 10px;
     border-radius: 15px;
     margin-top: 20px;
-}
+    font-size: 14px;
+    margin-bottom: 5px;
+    }
 .descontoInf p {
     font-size: 1.5em;
     font-weight: bold;
@@ -202,6 +213,7 @@ button:disabled {
     padding: 20px;
     border-radius: 15px;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 .order-summary h2 {
     font-size: 1.0em;
@@ -224,6 +236,7 @@ button:disabled {
     padding: 2px 5px;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 0.9em;
 }
 .disabled {
     text-decoration: line-through;
@@ -240,4 +253,16 @@ button:disabled {
 .strikethrough {
     text-decoration: line-through;
     color: grey;
+}
+.title2{
+    font-size: 11px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.select2{
+    font-size: 12px;
+
+}
+.botao{
+    font-size: 0.9em;
 }

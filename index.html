@@ -1,111 +1,185 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio</title>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="./assets/amor (1).png" alt="Logo Nutribox">
-        </div>
-        <div id="switch" onclick="Togglemode()">
-            <button></button>
-            <span></span>
-        </div>
-        <div class="title1">
-            <H1>MONTE SUA MARMITA</H1>
-        </divv>
-        <div class="base">
-            <div class="calc" data-group="1">
-                <div class="product">
-                    <label for="quantity1">Peito de Frango Grelhado:</label>
-                    <input type="number" id="quantity1" name="quantity1" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity2">Sobrecoxa Desfiada:</label>
-                    <input type="number" id="quantity2" name="quantity2" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity3">Carne Moída com Molho:</label>
-                    <input type="number" id="quantity3" name="quantity3" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity4">Proteína de Soja:</label>
-                    <input type="number" id="quantity4" name="quantity4" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity5">Grão de Bico:</label>
-                    <input type="number" id="quantity5" name="quantity5" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
+<div class="container">
+
+    <div class="logo">
+        <img src="./assets/amor (1).png" alt="Logo Nutribox">
+    </div>
+
+    <div id="switch" onclick="Togglemode()">
+        <button></button>
+        <span></span>
+    </div>
+
+    <div class="title1">
+        <h1>MONTE SUA MARMITA</h1>
+    </div>
+
+    <div class="base">
+
+        <!-- PROTEÍNAS -->
+        <div class="calc">
+            <div class="product">
+                <label for="quantity1">Peito de Frango Grelhado:</label>
+                <input type="number" id="quantity1" min="50" max="700" oninput="calculateTotal()">
             </div>
-            <div class="calc" data-group="2">
-                <div class="product">
-                    <label for="quantity6">Arroz Branco:</label>
-                    <input type="number" id="quantity6" name="quantity6" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity7">Arroz Integral:</label>
-                    <input type="number" id="quantity7" name="quantity7" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity8">Macarrão:</label>
-                    <input type="number" id="quantity8" name="quantity8" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="quantity9">Macarrão Integral:</label>
-                    <input type="number" id="quantity9" name="quantity9" min="50" max="250" oninput="selectOption(this)" onblur="validateQuantity(this)">
-                </div>
-                <div class="product">
-                    <label for="pureOption">Purê:</label>
-                    <select id="pureOption" name="pureOption" onchange="togglePureQuantity()">
-                        <option value="" disabled selected>Selecione uma opção</option>
-                        <option value="Batata">Batata</option>
-                        <option value="Abobora Cabotiá">Abobora Cabotiá</option>
-                        <option value="Batata Doce">Batata Doce</option>
-                    </select>
-                    <input type="number" id="quantity10" name="quantity10" min="50" max="250" oninput="togglePureOption()" onblur="validateQuantity(this)">
-                </div>
+            <div class="product">
+                <label for="quantity2">Sobrecoxa Desfiada:</label>
+                <input type="number" id="quantity2" min="50" max="700" oninput="calculateTotal()">
             </div>
-            <div class="calc">
-                <div class="product">
-                    <label for="quantity11">Mix de Legumes:</label>
-                    <input type="number" id="quantity11" name="quantity11" min="50" max="250" oninput="calculateTotal()" onblur="validateQuantity(this)">
-                </div>
+            <div class="product">
+                <label for="quantity3">Carne Moída com Molho:</label>
+                <input type="number" id="quantity3" min="50" max="700" oninput="calculateTotal()">
             </div>
-            <div class="calc nodesc" data-group="3">
-                <div class="product">
-                    <label for="specialDish">Prato Brasileiro - Arroz, Feijão, Frango Grelhado - 300g:</label>
-                    <input type="checkbox" id="specialDish" name="specialDish" onclick="toggleSpecialDish(this)">
-                </div>
+            <div class="product">
+                <label for="quantity4">Proteína de Soja:</label>
+                <input type="number" id="quantity4" min="50" max="700" oninput="calculateTotal()">
             </div>
-            <div class="Quantidade">
-                <label for="marmitaQuantity">Quantidade:</label>
-                <input type="number" id="marmitaQuantity" name="marmitaQuantity" min="1" oninput="calculateTotal()">
+            <div class="product">
+                <label for="quantity5">Grão de Bico:</label>
+                <input type="number" id="quantity5" min="50" max="700" oninput="calculateTotal()">
             </div>
-            <p>Total: R$ <span id="finalCost">0.00</span></p>
-            <button id="addButton" onclick="addItem()">Adicionar</button>
         </div>
 
-        <div class="order-summary" id="orderSummary">
-            <h2>Resumo do Pedido</h2>
-            <div id="summaryItems"></div>
-            <p>Total de Itens: <span id="totalItems">0</span></p>
-            <p>Valor Total: R$ <span id="totalValue">0.00</span></p>
-            <button onclick="sendOrder()">Realizar Pedido</button>
-            <div class="descontoInf">
-                <p>Descontos:</p>
-                <ul>
-                    <li>5 Marmitas = 5% off</li>
-                    <li>10 Marmitas = 10% off</li>
-                    <li>Descontos aplicados ao finalizar o pedido.</li>
-                </ul>
-                <p>Consulte taxa de entrega</p>
+        <!-- CARBOIDRATOS -->
+        <div class="calc">
+            <div class="product">
+                <label for="quantity6">Arroz Branco:</label>
+                <input type="number" id="quantity6" min="50" max="700" oninput="calculateTotal()">
+            </div>
+            <div class="product">
+                <label for="quantity7">Arroz Integral:</label>
+                <input type="number" id="quantity7" min="50" max="700" oninput="calculateTotal()">
+            </div>
+            <div class="product">
+                <label for="quantity8">Macarrão:</label>
+                <input type="number" id="quantity8" min="50" max="700" oninput="calculateTotal()">
+            </div>
+            <div class="product">
+                <label for="quantity9">Macarrão Integral:</label>
+                <input type="number" id="quantity9" min="50" max="700" oninput="calculateTotal()">
+            </div>
+            <div class="product">
+                <label>Purê:</label>
+                <select id="pureOption">
+                    <option value="" selected disabled>Selecione</option>
+                    <option value="Batata">Batata</option>
+                    <option value="Abóbora Cabotiá">Abóbora Cabotiá</option>
+                    <option value="Batata Doce">Batata Doce</option>
+                </select>
+                <input type="number" id="quantity10" min="50" max="700" oninput="calculateTotal()">
             </div>
         </div>
+
+        <!-- LEGUMES -->
+        <div class="calc">
+            <div class="product">
+                <label for="quantity11">Mix de Legumes:</label>
+                <input type="number" id="quantity11" min="50" max="700" oninput="calculateTotal()">
+            </div>
+        </div>
+
+        <!-- QUANTIDADE -->
+        <div class="Quantidade">
+            <label for="marmitaQuantity">Quantidade:</label>
+            <input type="number" id="marmitaQuantity" min="1" oninput="calculateTotal()">
+        </div>
+
+        <p>Total Marmitas: R$ <span id="finalCost">0.00</span></p>
+        <button class="botao" onclick="addMarmita()">Adicionar Marmita</button>
     </div>
-    <script src="script.js"></script>
+        <!-- PRATOS ESPECIAIS -->
+         <div class="title2">
+        <h1>PRATOS ESPECIAIS</h1>
+    </div>
+    <div class="base2">
+        <div class="calc">
+
+            <div class="product">
+                <label>Panqueca de Frango Desfiado</label>
+                <select class="select2" id="special_panqueca_frango">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="16|1">1un - R$16,00</option>
+                    <option value="75|5">5un - R$75,00</option>
+                    <option value="155|10">10un - R$155,00</option>
+                </select>
+            </div>
+
+            <div class="product">
+                <label>Panqueca de Carne Moída</label>
+                <select class="select2" id="special_panqueca_carne">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="19.5|1">1un - R$19,50</option>
+                    <option value="92.5|5">5un - R$92,50</option>
+                    <option value="190|10">10un - R$190,00</option>
+                </select>
+            </div>
+
+            <div class="product">
+                <label>Fricassê de Frango</label>
+                <select class="select2" id="special_fricasse">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="24.9|1">400g - R$24,90</option>
+                    <option value="39.9|1">800g - R$39,90</option>
+                </select>
+            </div>
+
+            <div class="product">
+                <label>Escondidinho de Carne Moída</label>
+                <select class="select2" id="special_escondidinho_carne">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="29.9|1">400g - R$29,90</option>
+                    <option value="49.9|1">800g - R$49,90</option>
+                </select>
+            </div>
+
+            <div class="product">
+                <label>Escondidinho de Frango Desfiado</label>
+                <select class="select2" id="special_escondidinho_frango">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="23.9|1">400g - R$23,90</option>
+                    <option value="46.9|1">800g - R$46,90</option>
+                </select>
+            </div>
+        </div>
+        <button class="botao" onclick="addSpecialDish()">Adicionar Prato Especial</button>
+
+    </div>
+
+    <!-- RESUMO -->
+    <div class="order-summary">
+        <h2>Resumo do Pedido</h2>
+        <div id="summaryItems"></div>
+
+        <p>Total de Itens: <span id="totalItems">0</span></p>
+        <p>Valor Total: R$ <span id="totalValue">0.00</span></p>
+
+        <button class="botao" onclick="sendOrder()">Realizar Pedido</button>
+
+        <!-- DESCONTOS -->
+        <div class="descontoInf">
+            <p>Descontos:</p>
+            <ul>
+                <li>5 Marmitas = 5% off</li>
+                <li>10 Marmitas = 10% off</li>
+                <li>* Descontos não se aplicam em pratos especiais</li>
+            </ul>
+            <p>Consulte taxa de entrega</p>
+        </div>
+    </div>
+    <div>
+        .
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

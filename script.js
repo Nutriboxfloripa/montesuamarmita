@@ -1,362 +1,216 @@
+/* ===============================
+   CONFIGURAÇÕES
+================================ */
+
+const pricePerKg = [80, 75, 110, 70, 70, 40, 40, 40, 40, 40, 60];
+
+let totalMarmitasQty = 0;
+let totalMarmitasValue = 0;
+let totalSpecialValue = 0;
+
+/* ===============================
+   CÁLCULO MARMITA
+================================ */
+
 function calculateTotal() {
-    const pricePerKg = [80, 75, 110, 70, 70, 40, 40, 40, 40, 40, 60]; 
     const quantities = [
-        document.getElementById('quantity1').value,
-        document.getElementById('quantity2').value,
-        document.getElementById('quantity3').value,
-        document.getElementById('quantity4').value,
-        document.getElementById('quantity5').value,
-        document.getElementById('quantity6').value,
-        document.getElementById('quantity7').value,
-        document.getElementById('quantity8').value,
-        document.getElementById('quantity9').value,
-        document.getElementById('quantity10').value,
-        document.getElementById('quantity11').value
+        quantity1.value, quantity2.value, quantity3.value, quantity4.value,
+        quantity5.value, quantity6.value, quantity7.value, quantity8.value,
+        quantity9.value, quantity10.value, quantity11.value
     ];
-    const specialDishChecked = document.getElementById('specialDish').checked;
-    const marmitaQuantity = specialDishChecked ? 7 : document.getElementById('marmitaQuantity').value;
-    let totalGrams = 0;
-    let totalCost = 0;
-    let hasGroup1 = false;
-    let hasGroup2 = false;
-    let validQuantities = true;
 
-    for (let i = 0; i < quantities.length; i++) {
-        if (quantities[i]) {
-            const quantity = parseInt(quantities[i]);
-            if (quantity < 50 || quantity > 250) {
-                validQuantities = false;
-                break;
-            }
-            totalGrams += quantity;
-            totalCost += (quantity / 1000) * pricePerKg[i];
-            if (i < 5) hasGroup1 = true;
-            if (i >= 5 && i < 10) hasGroup2 = true;
-        }
-    }
+    let total = 0;
 
-    if (!validQuantities) {
-        document.getElementById('finalCost').textContent = '0.00';
+    quantities.forEach((q, i) => {
+        if (q) total += (parseInt(q) / 1000) * pricePerKg[i];
+    });
+
+    const qty = parseInt(marmitaQuantity.value) || 0;
+    finalCost.textContent = (total * qty).toFixed(2);
+}
+
+/* ===============================
+   DESCONTO
+================================ */
+
+function applyDiscount(value, qty) {
+    if (qty >= 10) return value * 0.9;
+    if (qty >= 5) return value * 0.95;
+    return value;
+}
+
+/* ===============================
+   ADICIONAR MARMITA
+================================ */
+
+function addMarmita() {
+    const qty = parseInt(marmitaQuantity.value);
+    const value = parseFloat(finalCost.textContent);
+
+    if (!qty || value === 0) {
+        alert("Preencha a marmita corretamente.");
         return;
     }
 
-    if (totalGrams < 250 || totalGrams > 450 || !hasGroup1 || !hasGroup2) {
-        totalCost = 0;
-    }
+    totalMarmitasQty += qty;
+    totalMarmitasValue += value;
 
-    const fixedTax = 0.00;
-    const variableCosts = totalCost * 0.00;
-    const totalWithCosts = totalCost + fixedTax + variableCosts;
-    const profit = totalWithCosts * 0.00;
-    let finalCost = totalWithCosts + profit;
+    let itemsHTML = "";
 
-    if (totalGrams < 250 || totalGrams > 450 || !hasGroup1 || !hasGroup2 || marmitaQuantity == 0) {
-        finalCost = 0;
-    } else {
-        finalCost = finalCost * marmitaQuantity;
-    }
+    const names = [
+        "Peito de Frango Grelhado", "Sobrecoxa Desfiada", "Carne Moída com Molho",
+        "Proteína de Soja", "Grão de Bico", "Arroz Branco", "Arroz Integral",
+        "Macarrão", "Macarrão Integral", "Purê", "Mix de Legumes"
+    ];
 
-    if (specialDishChecked) {
-        finalCost = 99.00; // Preço fixo para o prato especial
-    }
+    const values = [
+        quantity1.value, quantity2.value, quantity3.value, quantity4.value,
+        quantity5.value, quantity6.value, quantity7.value, quantity8.value,
+        quantity9.value, quantity10.value, quantity11.value
+    ];
 
-    document.getElementById('finalCost').textContent = Math.max(finalCost, 0).toFixed(2);
+    values.forEach((v, i) => {
+        if (v) {
+            itemsHTML += `<p>${names[i]}${i === 9 ? ` (${pureOption.value})` : ""}: ${v}g</p>`;
+        }
+    });
+
+    summaryItems.innerHTML += `
+        <div class="summary-item">
+            ${itemsHTML}
+            <p>Quantidade: ${qty}</p>
+            <p>Valor: R$${value.toFixed(2)}</p>
+            <button onclick="removeItem(this, ${qty}, ${value}, false)">X</button>
+        </div><hr>
+    `;
+
+    clearMarmitaInputs();
+    updateTotal();
 }
 
-function validateQuantity(input) {
-    const quantity = parseInt(input.value);
-    if (quantity < 50 || quantity > 250) {
-        alert('A quantidade de cada item deve ser entre 50g e 250g.');
-        input.value = '';
-        const group = input.closest('.calc').getAttribute('data-group');
-        const allInputs = document.querySelectorAll(`.calc[data-group="${group}"] input`);
-        allInputs.forEach(i => {
-            i.disabled = false;
-            i.previousElementSibling.classList.remove('strikethrough');
-        });
-    }
-}
+/* ===============================
+   PRATOS ESPECIAIS
+================================ */
 
-function selectOption(input) {
-    const group = input.closest('.calc').getAttribute('data-group');
-    const allInputs = document.querySelectorAll(`.calc[data-group="${group}"] input`);
-    const allLabels = document.querySelectorAll(`.calc[data-group="${group}"] label`);
+function addSpecialDish() {
+    const specials = [
+        special_panqueca_frango,
+        special_panqueca_carne,
+        special_fricasse,
+        special_escondidinho_carne,
+        special_escondidinho_frango
+    ];
 
-    if (input.value !== '') {
-        allInputs.forEach(i => {
-            if (i !== input) {
-                i.disabled = true;
-                i.previousElementSibling.classList.add('strikethrough');
-            }
-        });
-        allLabels.forEach(label => {
-            if (label.htmlFor !== input.id) {
-                label.classList.add('strikethrough');
-            }
-        });
-    } else {
-        allInputs.forEach(i => {
-            i.disabled = false;
-            i.previousElementSibling.classList.remove('strikethrough');
-        });
-        allLabels.forEach(label => {
-            label.classList.remove('strikethrough');
-        });
-    }
+    let added = false;
 
-    calculateTotal();
-}
+    specials.forEach(select => {
+        if (select.value) {
+            const [price, qty] = select.value.split("|").map(Number);
+            totalSpecialValue += price;
 
-function togglePureOption() {
-    const pureQuantity = document.getElementById('quantity10').value;
-    const pureOptionSelect = document.getElementById('pureOption');
-    const allInputs = document.querySelectorAll(`.calc[data-group="2"] input:not(#quantity10)`);
-    const allLabels = document.querySelectorAll(`.calc[data-group="2"] label:not([for="quantity10"]), label[for="pureOption"]`);
+            summaryItems.innerHTML += `
+                <div class="summary-item nodesc">
+                    <p>${select.previousElementSibling.textContent}</p>
+                    <p>Quantidade: ${qty}</p>
+                    <p>Valor: R$${price.toFixed(2)}</p>
+                    <button onclick="removeItem(this, ${qty}, ${price}, true)">X</button>
+                </div><hr>
+            `;
 
-    if (pureQuantity) {
-        pureOptionSelect.disabled = false;
-        allLabels.forEach(label => {
-            if (label.htmlFor === 'pureOption') {
-                label.classList.remove('strikethrough');
-            }
-        });
-        allInputs.forEach(i => {
-            i.disabled = true;
-            i.previousElementSibling.classList.add('strikethrough');
-        });
-        allLabels.forEach(label => {
-            if (label.htmlFor !== 'pureOption') {
-                label.classList.add('strikethrough');
-            }
-        });
-    } else {
-        pureOptionSelect.value = '';
-        pureOptionSelect.disabled = true;
-        pureOptionSelect.previousElementSibling.classList.add('strikethrough');
-        allInputs.forEach(i => {
-            i.disabled = false;
-            i.previousElementSibling.classList.remove('strikethrough');
-        });
-        allLabels.forEach(label => {
-            label.classList.remove('strikethrough');
-        });
-    }
-}
+            select.value = "";
+            added = true;
+        }
+    });
 
-function toggleSpecialDish(checkbox) {
-    const allInputs = document.querySelectorAll('.calc input:not(#specialDish), .calc select');
-    const quantityInput = document.getElementById('marmitaQuantity');
-    const labels = document.querySelectorAll('.calc label:not([for="specialDish"])');
-
-    if (checkbox.checked) {
-        allInputs.forEach(input => {
-            input.disabled = true;
-            input.value = ''; // Clear the values of other inputs
-        });
-        labels.forEach(label => {
-            label.classList.add('strikethrough');
-        });
-        checkbox.disabled = false; // Keep the special dish checkbox enabled
-        quantityInput.value = 7;
-        quantityInput.disabled = true;
-    } else {
-        allInputs.forEach(input => {
-            input.disabled = false;
-        });
-        labels.forEach(label => {
-            label.classList.remove('strikethrough');
-        });
-        quantityInput.value = '';
-        quantityInput.disabled = false;
-    }
-
-    calculateTotal();
-}
-
-function addItem() {
-    const marmitaQuantity = document.getElementById('marmitaQuantity').value;
-    const finalCost = document.getElementById('finalCost').textContent;
-    const pureOption = document.getElementById('pureOption').value;
-    const pureQuantity = document.getElementById('quantity10').value;
-    const specialDish = document.getElementById('specialDish').checked;
-
-    if (pureQuantity && !pureOption) {
-        alert("Selecione o tipo de purê.");
+    if (!added) {
+        alert("Selecione um prato especial.");
         return;
     }
 
-    if (specialDish) {
-        if (finalCost == "0.00") {
-            alert("*Preencha a quantidade e escolha um carboidrato e uma proteína. \n**A soma total dos itens deve ser entre 250g e 450g. \n***Min de 50g max de 250g por porção");
-            return;
-        }
+    updateTotal();
+}
 
-        let summaryItems = '<div class="summary-item nodesc">';
-        summaryItems += `<p>Arroz: 100g</p>`;
-        summaryItems += `<p>Feijão: 100g</p>`;
-        summaryItems += `<p>Frango Grelhado: 100g</p>`;
-        summaryItems += `<p>Quantia: 7x</p>`;
-        summaryItems += `<p>Valor: R$99.00</p>`;
-        summaryItems += '<button onclick="removeItem(this)">Excluir</button>';
-        summaryItems += '</div><hr>';
+/* ===============================
+   REMOVER ITEM
+================================ */
 
-        document.getElementById('summaryItems').innerHTML += summaryItems;
+function removeItem(btn, qty, value, isSpecial) {
+    btn.parentElement.nextElementSibling.remove();
+    btn.parentElement.remove();
 
-        const totalItems = document.getElementById('totalItems');
-        totalItems.textContent = parseInt(totalItems.textContent) + 7;
-
-        document.getElementById('specialDish').checked = false;
-        toggleSpecialDish(document.getElementById('specialDish'));
+    if (isSpecial) {
+        totalSpecialValue -= value;
     } else {
-        if (marmitaQuantity == 0 || finalCost == "0.00") {
-            alert("*Preencha a quantidade e escolha um carboidrato e uma proteína. \n**A soma total dos itens deve ser entre 250g e 450g. \n***Min de 50g max de 250g por porção");
-            return;
-        }
-
-        const productNames = [
-            "Peito de Frango Grelhado",
-            "Sobrecoxa Desfiada",
-            "Carne Moída com Molho",
-            "Proteína de Soja",
-            "Grão de Bico",
-            "Arroz Branco",
-            "Arroz Integral",
-            "Macarrão",
-            "Macarrão Integral",
-            "Purê",
-            "Mix de Legumes"
-        ];
-        const quantities = [
-            document.getElementById('quantity1').value,
-            document.getElementById('quantity2').value,
-            document.getElementById('quantity3').value,
-            document.getElementById('quantity4').value,
-            document.getElementById('quantity5').value,
-            document.getElementById('quantity6').value,
-            document.getElementById('quantity7').value,
-            document.getElementById('quantity8').value,
-            document.getElementById('quantity9').value,
-            document.getElementById('quantity10').value,
-            document.getElementById('quantity11').value
-        ];
-
-        let summaryItems = '<div class="summary-item">';
-        for (let i = 0; i < quantities.length; i++) {
-            if (quantities[i]) {
-                if (i == 9) {
-                    summaryItems += `<p>${productNames[i]} (${pureOption}): ${quantities[i]}g</p>`;
-                } else {
-                    summaryItems += `<p>${productNames[i]}: ${quantities[i]}g</p>`;
-                }
-            }
-        }
-        summaryItems += `<p>Quantia: ${marmitaQuantity}x</p>`;
-        summaryItems += `<p>Valor: R$${finalCost}</p>`;
-        summaryItems += '<button onclick="removeItem(this)">Excluir</button>';
-        summaryItems += '</div><hr>';
-
-        document.getElementById('summaryItems').innerHTML += summaryItems;
-
-        const totalItems = document.getElementById('totalItems');
-        totalItems.textContent = parseInt(totalItems.textContent) + parseInt(marmitaQuantity);
+        totalMarmitasQty -= qty;
+        totalMarmitasValue -= value;
     }
 
-    recalculateTotalValue();
-    clearInputs();
+    updateTotal();
 }
 
-function clearInputs() {
-    const inputs = document.querySelectorAll('.calc input, .calc select');
-    inputs.forEach(input => {
-        input.value = '';
-        input.disabled = false;
-        input.previousElementSibling.classList.remove('strikethrough');
-    });
-    document.getElementById('marmitaQuantity').value = '';
-    document.getElementById('finalCost').textContent = '0.00';
-    document.getElementById('pureOption').disabled = true;
+/* ===============================
+   TOTAL FINAL
+================================ */
+
+function updateTotal() {
+    const discountedMarmitas = applyDiscount(
+        totalMarmitasValue,
+        totalMarmitasQty
+    );
+
+    totalItems.textContent = totalMarmitasQty;
+    totalValue.textContent = (discountedMarmitas + totalSpecialValue).toFixed(2);
 }
 
-function applyDiscount(totalValue, totalItems) {
-    let discount = 0;
-    if (totalItems >= 10) {
-        discount = 0.10;
-    } else if (totalItems >= 5) {
-        discount = 0.05;
-    }
-    return Math.max(totalValue * (1 - discount), 0);
+/* ===============================
+   LIMPAR CAMPOS
+================================ */
+
+function clearMarmitaInputs() {
+    document.querySelectorAll('.calc input').forEach(i => i.value = "");
+    document.querySelectorAll('.calc select').forEach(s => s.value = "");
+    marmitaQuantity.value = "";
+    finalCost.textContent = "0.00";
 }
 
-function recalculateTotalValue() {
-    const summaryItems = document.querySelectorAll('.summary-item');
-    let newTotalValue = 0;
-    let totalItemsWithoutSpecial = 0;
-    let specialDishTotal = 0;
-
-    summaryItems.forEach(item => {
-        const itemValue = parseFloat(item.querySelector('p:nth-last-child(2)').textContent.replace('Valor: R$', ''));
-        if (!item.classList.contains('nodesc')) {
-            newTotalValue += itemValue;
-            const itemQuantity = parseInt(item.querySelector('p:nth-last-child(3)').textContent.match(/\d+/)[0]);
-            totalItemsWithoutSpecial += itemQuantity;
-        } else {
-            specialDishTotal += itemValue;
-        }
-    });
-
-    const totalValue = document.getElementById('totalValue');
-    totalValue.textContent = (applyDiscount(newTotalValue, totalItemsWithoutSpecial) + specialDishTotal).toFixed(2);
-}
-
-function removeItem(button) {
-    const item = button.parentElement;
-    const itemQuantity = parseInt(item.querySelector('p:nth-last-child(3)').textContent.match(/\d+/)[0]);
-
-    item.nextElementSibling.remove();
-    item.remove();
-
-    const totalItems = document.getElementById('totalItems');
-    totalItems.textContent = parseInt(totalItems.textContent) - itemQuantity;
-
-    recalculateTotalValue();
-}
+/* ===============================
+   WHATSAPP
+================================ */
 
 function sendOrder() {
     const items = document.querySelectorAll('.summary-item');
-    if (items.length === 0) {
-        alert("Adicione pelo menos um item ao pedido.");
+    if (!items.length) {
+        alert("Adicione itens ao pedido.");
         return;
     }
 
-    let orderMessage = "Olá, gostaria de realizar meu pedido!\n\n";
+    let msg = "Olá! Gostaria de fazer meu pedido:\n\n";
+
     items.forEach(item => {
-        const itemDetails = item.querySelectorAll('p');
-        itemDetails.forEach(detail => {
-            orderMessage += detail.textContent + "\n";
+        item.querySelectorAll("p").forEach(p => {
+            msg += p.textContent + "\n";
         });
-        orderMessage += "---------------------------\n";
+        msg += "--------------------\n";
     });
 
-    const totalItems = document.getElementById('totalItems').textContent;
-    const totalValue = document.getElementById('totalValue').textContent;
+    msg += `Valor Total: R$${totalValue.textContent}`;
 
-    orderMessage += `Total de Itens: ${totalItems}\n`;
-    orderMessage += `Valor Total: R$ ${totalValue}\n`;
-
-    const whatsappNumber = "5548991750119";
-    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(orderMessage)}`;
-
-    window.open(whatsappLink, '_blank');
+    window.open(
+        `https://wa.me/5548991750119?text=${encodeURIComponent(msg)}`,
+        "_blank"
+    );
 }
 
-function Togglemode () {
-    const html = document.documentElement
-    html.classList.toggle('light')
-    const img = document.querySelector('.logo img')
+/* ===============================
+   DARK / LIGHT
+================================ */
 
-    if(html.classList.contains('light')){
-        img.setAttribute("src","./assets/amor.png")    
-    } else {
-        img.setAttribute("src","./assets/amor (1).png")    
-    }
+function Togglemode() {
+    const html = document.documentElement;
+    const img = document.querySelector('.logo img');
+
+    html.classList.toggle('light');
+    img.src = html.classList.contains('light')
+        ? "./assets/amor.png"
+        : "./assets/amor (1).png";
 }
