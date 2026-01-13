@@ -1,185 +1,308 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cardápio</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-<div class="container">
-
-    <div class="logo">
-        <img src="./assets/amor (1).png" alt="Logo Nutribox">
-    </div>
-
-    <div id="switch" onclick="Togglemode()">
-        <button></button>
-        <span></span>
-    </div>
-
-    <div class="title1">
-        <h1>MONTE SUA MARMITA</h1>
-    </div>
-
-    <div class="base">
-
-        <!-- PROTEÍNAS -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="./assets/amor (1).png" alt="Logo Nutribox" />
+      </div>
+      <div id="switch" onclick="Togglemode()">
+        <button></button> <span></span>
+      </div>
+      <div class="title1"><h1>MONTE SUA MARMITA</h1></div>
+      <div class="base">
         <div class="calc">
-            <div class="product">
-                <label for="quantity1">Peito de Frango Grelhado:</label>
-                <input type="number" id="quantity1" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity2">Sobrecoxa Desfiada:</label>
-                <input type="number" id="quantity2" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity3">Carne Moída com Molho:</label>
-                <input type="number" id="quantity3" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity4">Proteína de Soja:</label>
-                <input type="number" id="quantity4" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity5">Grão de Bico:</label>
-                <input type="number" id="quantity5" min="50" max="700" oninput="calculateTotal()">
-            </div>
+          <div class="product">
+            <label>Peito de Frango Grelhado:</label>
+            <input
+              type="number"
+              id="quantity1"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Sobrecoxa Desfiada:</label>
+            <input
+              type="number"
+              id="quantity2"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Carne Moída com Molho:</label>
+            <input
+              type="number"
+              id="quantity3"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Proteína de Soja:</label>
+            <input
+              type="number"
+              id="quantity4"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Grão de Bico:</label>
+            <input
+              type="number"
+              id="quantity5"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
         </div>
-
-        <!-- CARBOIDRATOS -->
         <div class="calc">
-            <div class="product">
-                <label for="quantity6">Arroz Branco:</label>
-                <input type="number" id="quantity6" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity7">Arroz Integral:</label>
-                <input type="number" id="quantity7" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity8">Macarrão:</label>
-                <input type="number" id="quantity8" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label for="quantity9">Macarrão Integral:</label>
-                <input type="number" id="quantity9" min="50" max="700" oninput="calculateTotal()">
-            </div>
-            <div class="product">
-                <label>Purê:</label>
-                <select id="pureOption">
-                    <option value="" selected disabled>Selecione</option>
-                    <option value="Batata">Batata</option>
-                    <option value="Abóbora Cabotiá">Abóbora Cabotiá</option>
-                    <option value="Batata Doce">Batata Doce</option>
-                </select>
-                <input type="number" id="quantity10" min="50" max="700" oninput="calculateTotal()">
-            </div>
+          <div class="product">
+            <label>Arroz Branco:</label>
+            <input
+              type="number"
+              id="quantity6"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Arroz Integral:</label>
+            <input
+              type="number"
+              id="quantity7"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Macarrão:</label>
+            <input
+              type="number"
+              id="quantity8"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Macarrão Integral:</label>
+            <input
+              type="number"
+              id="quantity9"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
+          <div class="product">
+            <label>Purê:</label>
+            <select id="pureOption">
+              <option value="" disabled selected>Selecione</option>
+              <option value="Batata">Batata</option>
+              <option value="Abóbora Cabotiá">Abóbora Cabotiá</option>
+              <option value="Batata Doce">Batata Doce</option>
+            </select>
+            <input
+              type="number"
+              id="quantity10"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
         </div>
-
-        <!-- LEGUMES -->
         <div class="calc">
-            <div class="product">
-                <label for="quantity11">Mix de Legumes:</label>
-                <input type="number" id="quantity11" min="50" max="700" oninput="calculateTotal()">
-            </div>
+          <div class="product">
+            <label>Mix de Legumes:</label>
+            <input
+              type="number"
+              id="quantity11"
+              min="50"
+              max="700"
+              oninput="calculateTotal()"
+            />
+          </div>
         </div>
-
-        <!-- QUANTIDADE -->
         <div class="Quantidade">
-            <label for="marmitaQuantity">Quantidade:</label>
-            <input type="number" id="marmitaQuantity" min="1" oninput="calculateTotal()">
+          <label>Quantidade:</label>
+          <input
+            type="number"
+            id="marmitaQuantity"
+            min="1"
+            oninput="calculateTotal()"
+          />
         </div>
-
         <p>Total Marmitas: R$ <span id="finalCost">0.00</span></p>
         <button class="botao" onclick="addMarmita()">Adicionar Marmita</button>
-    </div>
-        <!-- PRATOS ESPECIAIS -->
-         <div class="title2">
-        <h1>PRATOS ESPECIAIS</h1>
-    </div>
-    <div class="base2">
+      </div>
+      <div class="title2"><h1>PRATOS ESPECIAIS</h1></div>
+      <div class="base2">
         <div class="calc">
-
-            <div class="product">
-                <label>Panqueca de Frango Desfiado</label>
-                <select class="select2" id="special_panqueca_frango">
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="16|1">1un - R$16,00</option>
-                    <option value="75|5">5un - R$75,00</option>
-                    <option value="155|10">10un - R$155,00</option>
-                </select>
-            </div>
-
-            <div class="product">
-                <label>Panqueca de Carne Moída</label>
-                <select class="select2" id="special_panqueca_carne">
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="19.5|1">1un - R$19,50</option>
-                    <option value="92.5|5">5un - R$92,50</option>
-                    <option value="190|10">10un - R$190,00</option>
-                </select>
-            </div>
-
-            <div class="product">
-                <label>Fricassê de Frango</label>
-                <select class="select2" id="special_fricasse">
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="24.9|1">400g - R$24,90</option>
-                    <option value="39.9|1">800g - R$39,90</option>
-                </select>
-            </div>
-
-            <div class="product">
-                <label>Escondidinho de Carne Moída</label>
-                <select class="select2" id="special_escondidinho_carne">
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="29.9|1">400g - R$29,90</option>
-                    <option value="49.9|1">800g - R$49,90</option>
-                </select>
-            </div>
-
-            <div class="product">
-                <label>Escondidinho de Frango Desfiado</label>
-                <select class="select2" id="special_escondidinho_frango">
-                    <option value="" disabled selected>Selecione</option>
-                    <option value="23.9|1">400g - R$23,90</option>
-                    <option value="46.9|1">800g - R$46,90</option>
-                </select>
-            </div>
+          <div class="product">
+            <label>Panqueca de Frango Desfiado</label>
+            <select id="special_panqueca_frango" class="select2">
+              <option value="" disabled selected>Selecione</option>
+              <option value="16|1">1un - R$16,00</option>
+              <option value="75|5">5un - R$75,00</option>
+              <option value="155|10">10un - R$155,00</option>
+            </select>
+          </div>
+          <div class="product">
+            <label>Panqueca de Carne Moída</label>
+            <select id="special_panqueca_carne" class="select2">
+              <option value="" disabled selected>Selecione</option>
+              <option value="19.5|1">1un - R$19,50</option>
+              <option value="92.5|5">5un - R$92,50</option>
+              <option value="190|10">10un - R$190,00</option>
+            </select>
+          </div>
+          <div class="product">
+            <label>Fricassê de Frango</label>
+            <select id="special_fricasse" class="select2">
+              <option value="" disabled selected>Selecione</option>
+              <option value="24.9|1">400g - R$24,90</option>
+              <option value="39.9|1">800g - R$39,90</option>
+            </select>
+          </div>
+          <div class="product">
+            <label>Escondidinho de Carne Moída</label>
+            <select id="special_escondidinho_carne" class="select2">
+              <option value="" disabled selected>Selecione</option>
+              <option value="29.9|1">400g - R$29,90</option>
+              <option value="49.9|1">800g - R$49,90</option>
+            </select>
+          </div>
+          <div class="product">
+            <label>Escondidinho de Frango Desfiado</label>
+            <select id="special_escondidinho_frango" class="select2">
+              <option value="" disabled selected>Selecione</option>
+              <option value="23.9|1">400g - R$23,90</option>
+              <option value="46.9|1">800g - R$46,90</option>
+            </select>
+          </div>
         </div>
-        <button class="botao" onclick="addSpecialDish()">Adicionar Prato Especial</button>
+        <button class="botao" onclick="addSpecialDish()">
+          Adicionar Prato Especial
+        </button>
+      </div>
+      <!-- ENTREGA / RETIRADA -->
+       <div class="title2"><h1>ENTREGA</h1></div>
 
-    </div>
+      <div class="base2">
+        <div class="calc">
+          <div class="product">
+            <button class="botao" onclick="showEntrega()">Entrega</button>
+            <button class="botao" onclick="showRetirada()">Retirada</button>
+          </div>
 
-    <!-- RESUMO -->
-    <div class="order-summary">
+          <!-- ENTREGA -->
+          <div id="entregaBox" class="delivery-content" style="display:none;">
+            <div class="row">
+              <div class="field">
+                <label>Nome</label>
+                <input type="text" id="clienteNome" placeholder="Nome completo">
+              </div>
+              <div class="field">
+                <label>CEP</label>
+                <input type="text" id="cep" placeholder="Digite o CEP">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Rua</label>
+              <input type="text" id="rua" disabled>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label>Número</label>
+                <input type="text" id="numero">
+              </div>
+              <div class="field">
+                <label>Complemento</label>
+                <input type="text" id="complemento">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label>Bairro</label>
+                <input type="text" id="bairro" disabled>
+              </div>
+              <div class="field">
+                <label>Cidade</label>
+                <input type="text" id="cidade" disabled>
+              </div>
+            </div>
+
+            <div style="text-align:center;">
+              <button class="botao" onclick="addEntrega()">Adicionar</button>
+            </div>
+          </div>
+
+          <!-- RETIRADA -->
+          <div id="retiradaBox" style="display:none;">
+            <div class="delivery-address">
+              <p style="text-align:left;">
+                R. Marcos Nunes Viêira, 89<br>
+                Saco dos Limões – Florianópolis/SC
+              </p>
+              <p style="text-align:left;">
+                <a href="https://www.google.com/maps/dir//R.+Marcos+Nunes+Vi%C3%AAira,+89" target="_blank">
+                  📍 Ver rota
+                </a>
+              </p>
+            </div>
+
+            <div class="product">
+              <label>Dia da Retirada:</label>
+              <select id="diaRetirada">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Domingo">Domingo</option>
+                <option value="Segunda-feira">Segunda-feira</option>
+              </select>
+            </div>
+
+            <div style="text-align:center;">
+              <button class="botao" onclick="addRetirada()">Adicionar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESUMO -->
+      <div class="order-summary">
         <h2>Resumo do Pedido</h2>
         <div id="summaryItems"></div>
-
         <p>Total de Itens: <span id="totalItems">0</span></p>
         <p>Valor Total: R$ <span id="totalValue">0.00</span></p>
-
         <button class="botao" onclick="sendOrder()">Realizar Pedido</button>
-
-        <!-- DESCONTOS -->
         <div class="descontoInf">
-            <p>Descontos:</p>
-            <ul>
-                <li>5 Marmitas = 5% off</li>
-                <li>10 Marmitas = 10% off</li>
-                <li>* Descontos não se aplicam em pratos especiais</li>
-            </ul>
-            <p>Consulte taxa de entrega</p>
+          <p>Descontos:</p>
+          <ul>
+            <li>5 Marmitas = 5% off</li>
+            <li>10 Marmitas = 10% off</li>
+            <li>* Descontos não se aplicam em pratos especiais</li>
+          </ul>
+          <p>Consulte taxa de entrega</p>
         </div>
+      </div>
     </div>
-    <div>
-        .
-    </div>
-
-</div>
-
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
