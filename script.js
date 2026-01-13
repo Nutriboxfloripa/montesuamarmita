@@ -128,7 +128,8 @@ Valor: ${fee!==undefined?`R$${fee.toFixed(2)}`:"Confirmar valor"}`}
 function addRetirada(){
     if(deliveryData)return alert("Remova a opção atual para alterar.")
     if(!diaRetirada.value)return alert("Selecione o dia da retirada.")
-    deliveryData={type:"Retirada",valor:0,texto:`Retirada<br>Dia: ${diaRetirada.value}<br>R. Marcos Nunes Viêira, 89 - Saco dos Limões`}
+    deliveryData={type:"Retirada",valor:0,texto:`Retirada<br> Dia: ${diaRetirada.value}<br> 
+R. Marcos Nunes Viêira, 89 - Saco dos Limões`}
     summaryItems.innerHTML+=`
     <div class="summary-item retirada">
         <p>${deliveryData.texto}</p>
