@@ -141,26 +141,30 @@ cep.addEventListener("blur",()=>{
 })
 
 function addEntrega(){
-  if(deliveryData)return alert("Remova a opção atual para alterar.")
+  if(deliveryData) return alert("Remova a opção atual para alterar.")
 
-  const nome=clienteNome.value
-  const b=bairro.value
-  if(!nome||!b)return alert("Preencha nome e endereço.")
+  const nome = clienteNome.value.trim()
+  const b = bairro.value.trim()
+  const num = numero.value.trim() // pega o número
 
-  const fee=deliveryFees[b]||0
+  if(!nome || !b) return alert("Preencha nome e endereço.")
+  if(!num) return alert("Preencha o número.")
 
-  deliveryData={
-    type:"Entrega",
-    valor:fee,
-    texto:`Entrega<br>
-    Nome: ${nome}<br>
-    ${rua.value}, ${numero.value}<br>
-    ${b} - ${cidade.value}<br>
-    Valor: R$${fee.toFixed(2)}`
+  const fee = deliveryFees[b] || 0
+
+  deliveryData = {
+    type: "Entrega",
+    valor: fee,
+    texto: `Entrega<br>
+Nome: ${nome}<br>
+${rua.value}, ${num}<br>
+${b} - ${cidade.value}<br>
+Valor: R$${fee.toFixed(2)}`
   }
 
   renderDelivery()
 }
+
 
 function addRetirada(){
   if(deliveryData)return alert("Remova a opção atual para alterar.")

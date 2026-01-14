@@ -213,7 +213,7 @@ button:disabled {
   padding: 20px;
   border-radius: 15px;
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 5px;
 }
 .order-summary h2 {
   font-size: 1em;

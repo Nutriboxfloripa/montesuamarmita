@@ -224,33 +224,33 @@
 
             <div class="field">
               <label>Rua</label>
-              <input type="text" id="rua" disabled />
+              <input type="text" id="rua" placeholder="Rua, Av, etc." disabled />
             </div>
 
             <div class="row">
               <div class="field">
                 <label>Número</label>
-                <input type="text" id="numero" />
+                <input type="text" id="numero" placeholder="Numero"/>
               </div>
               <div class="field">
                 <label>Complemento</label>
-                <input type="text" id="complemento" />
+                <input type="text" id="complemento" placeholder="Ap, casa, CJ" />
               </div>
             </div>
 
             <div class="row">
               <div class="field">
                 <label>Bairro</label>
-                <input type="text" id="bairro" disabled />
+                <input type="text" id="bairro" placeholder="Bairro" disabled />
               </div>
               <div class="field">
                 <label>Cidade</label>
-                <input type="text" id="cidade" disabled />
+                <input type="text" id="cidade" placeholder="Cidade" disabled />
               </div>
             </div>
 
             <!-- 🔥 ÚNICA ADIÇÃO (NÃO QUEBRA CSS) -->
-            <p id="deliveryFeeLabel" style="text-align:center;font-weight:bold;display:none"></p>
+            <p id="deliveryFeeLabel" style="text-align:center;font-weight:bold;display:none; font-size: 1.5em;"></p>
 
             <div style="text-align: center">
               <button class="botao2" onclick="addEntrega()">Adicionar</button>
@@ -306,6 +306,7 @@
           <p>Consulte taxa de entrega</p>
         </div>
       </div>
+      <div>.</div>
     </div>
     <script src="script.js"></script>
   </body>
