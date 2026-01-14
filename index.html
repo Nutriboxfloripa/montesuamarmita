@@ -202,7 +202,6 @@
       </div>
       <!-- ENTREGA / RETIRADA -->
        <div class="title2"><h1>ENTREGA</h1></div>
-
       <div class="base2">
         <div class="calc">
           <div class="product">
@@ -211,59 +210,65 @@
           </div>
 
           <!-- ENTREGA -->
-          <div id="entregaBox" class="delivery-content" style="display:none;">
+          <div id="entregaBox" class="delivery-content" style="display: none">
             <div class="row">
               <div class="field">
                 <label>Nome</label>
-                <input type="text" id="clienteNome" placeholder="Nome completo">
+                <input type="text" id="clienteNome" placeholder="Nome completo" />
               </div>
               <div class="field">
                 <label>CEP</label>
-                <input type="text" id="cep" placeholder="Digite o CEP">
+                <input type="text" id="cep" placeholder="Digite o CEP" />
               </div>
             </div>
 
             <div class="field">
               <label>Rua</label>
-              <input type="text" id="rua" disabled>
+              <input type="text" id="rua" disabled />
             </div>
 
             <div class="row">
               <div class="field">
                 <label>Número</label>
-                <input type="text" id="numero">
+                <input type="text" id="numero" />
               </div>
               <div class="field">
                 <label>Complemento</label>
-                <input type="text" id="complemento">
+                <input type="text" id="complemento" />
               </div>
             </div>
 
             <div class="row">
               <div class="field">
                 <label>Bairro</label>
-                <input type="text" id="bairro" disabled>
+                <input type="text" id="bairro" disabled />
               </div>
               <div class="field">
                 <label>Cidade</label>
-                <input type="text" id="cidade" disabled>
+                <input type="text" id="cidade" disabled />
               </div>
             </div>
 
-            <div style="text-align:center;">
-              <button class="botao" onclick="addEntrega()">Adicionar</button>
+            <!-- 🔥 ÚNICA ADIÇÃO (NÃO QUEBRA CSS) -->
+            <p id="deliveryFeeLabel" style="text-align:center;font-weight:bold;display:none"></p>
+
+            <div style="text-align: center">
+              <button class="botao2" onclick="addEntrega()">Adicionar</button>
             </div>
           </div>
 
           <!-- RETIRADA -->
-          <div id="retiradaBox" style="display:none;">
+          <div id="retiradaBox" style="display: none">
             <div class="delivery-address">
-              <p style="text-align:left;">
-                R. Marcos Nunes Viêira, 89<br>
+              <p>
+                R. Marcos Nunes Viêira, 89<br />
                 Saco dos Limões – Florianópolis/SC
               </p>
-              <p style="text-align:left;">
-                <a href="https://www.google.com/maps/dir//R.+Marcos+Nunes+Vi%C3%AAira,+89" target="_blank">
+              <p>
+                <a
+                  href="https://www.google.com/maps/dir//R.+Marcos+Nunes+Vi%C3%AAira,+89"
+                  target="_blank"
+                >
                   📍 Ver rota
                 </a>
               </p>
@@ -278,13 +283,12 @@
               </select>
             </div>
 
-            <div style="text-align:center;">
-              <button class="botao" onclick="addRetirada()">Adicionar</button>
+            <div style="text-align: center">
+              <button class="botao2" onclick="addRetirada()">Adicionar</button>
             </div>
           </div>
         </div>
       </div>
-
       <!-- RESUMO -->
       <div class="order-summary">
         <h2>Resumo do Pedido</h2>
