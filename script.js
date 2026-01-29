@@ -1,4 +1,4 @@
-const pricePerKg = [80,75,110,70,70,40,40,40,40,40,60]
+const pricePerKg = [80,75,110,70,70,40,40,40,40,40,40,60]
 
 let totalMarmitasQty = 0
 let totalMarmitasValue = 0
@@ -21,7 +21,7 @@ const deliveryFees = {
 function calculateTotal(){
   const q=[
     quantity1.value,quantity2.value,quantity3.value,quantity4.value,quantity5.value,
-    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,quantity11.value
+    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,quantity11.value,quantity12.value
   ]
   let total=0
   q.forEach((v,i)=>{ if(v) total+=(parseInt(v)/1000)*pricePerKg[i] })
@@ -51,7 +51,7 @@ function addMarmita(){
 
   const vals=[
     quantity1.value,quantity2.value,quantity3.value,quantity4.value,quantity5.value,
-    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,quantity11.value
+    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,quantity11.value,quantity12.value
   ]
 
   let html=""
