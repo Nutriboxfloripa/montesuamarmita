@@ -44,10 +44,10 @@ function addMarmita(){
   totalMarmitasValue+=value
 
   const names=[
-    "Peito de Frango Grelhado","Sobrecoxa Desfiada","Carne Moída com Molho",
-    "Proteína de Soja","Grão de Bico","Arroz Branco","Arroz Integral", "Feijão"
-    "Macarrão","Macarrão Integral","Purê","Mix de Legumes"
-  ]
+  "Peito de Frango Grelhado","Sobrecoxa Desfiada","Carne Moída com Molho",
+  "Proteína de Soja","Grão de Bico","Arroz Branco","Arroz Integral", "Feijão"
+  "Macarrão","Macarrão Integral","Purê","Mix de Legumes"
+]
 
   const vals=[
     quantity1.value,quantity2.value,quantity3.value,quantity4.value,quantity5.value,
