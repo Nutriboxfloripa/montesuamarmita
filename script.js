@@ -3,7 +3,7 @@ const pricePerKg = [80,75,110,70,70,40,40,40,40,40,40,60]
 let totalMarmitasQty = 0
 let totalMarmitasValue = 0
 let totalSpecialValue = 0
-let totalSpecialQty = 0 // quantidade de pratos especiais
+let totalSpecialQty = 0
 let deliveryData = null
 
 const deliveryFees = {
@@ -21,54 +21,93 @@ const deliveryFees = {
 function calculateTotal(){
   const q=[
     quantity1.value,quantity2.value,quantity3.value,quantity4.value,quantity5.value,
-    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,quantity11.value,quantity12.value
+    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,
+    quantity11.value,quantity12.value
   ]
-  let total=0
-  q.forEach((v,i)=>{ if(v) total+=(parseInt(v)/1000)*pricePerKg[i] })
-  const qty=parseInt(marmitaQuantity.value)||0
-  finalCost.textContent=(total*qty).toFixed(2)
+
+  let total = 0
+  q.forEach((v,i)=>{
+    if(v) total += (parseInt(v) / 1000) * pricePerKg[i]
+  })
+
+  const qty = parseInt(marmitaQuantity.value) || 0
+  finalCost.textContent = (total * qty).toFixed(2)
 }
 
 function applyDiscount(v,q){
-  if(q>=10)return v*0.9
-  if(q>=5)return v*0.95
+  if(q >= 10) return v * 0.9
+  if(q >= 5) return v * 0.95
   return v
 }
 
 function addMarmita(){
-  const qty=parseInt(marmitaQuantity.value)
-  const value=parseFloat(finalCost.textContent)
-  if(!qty||value===0)return alert("Preencha a marmita corretamente.")
+  const qty = parseInt(marmitaQuantity.value)
+  const value = parseFloat(finalCost.textContent)
 
-  totalMarmitasQty+=qty
-  totalMarmitasValue+=value
+  if(!qty || value === 0){
+    alert("Preencha a marmita corretamente.")
+    return
+  }
 
-  const names=[
-  "Peito de Frango Grelhado",
-  "Sobrecoxa Desfiada",
-  "Carne Moída com Molho",
-  "Proteína de Soja",
-  "Grão de Bico",
-  "Arroz Branco",
-  "Arroz Integral",
-  "Feijão",
-  "Macarrão",
-  "Macarrão Integral",
-  "Purê",
-  "Mix de Legumes"
-]
+  /* 🔒 AJUSTE 1 — PURÊ OBRIGATÓRIO */
+  if(quantity11.value && !pureOption.value){
+    alert("Selecione o tipo de purê.")
+    return
+  }
 
-  const vals=[
-    quantity1.value,quantity2.value,quantity3.value,quantity4.value,quantity5.value,
-    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,quantity11.value,quantity12.value
+  /* 🔁 AJUSTE 2 — PROTEÍNA ↔ CARBOIDRATO */
+  const temProteina = [
+    quantity1.value,quantity2.value,quantity3.value,
+    quantity4.value,quantity5.value
+  ].some(v => parseInt(v) > 0)
+
+  const temCarbo = [
+    quantity6.value,quantity7.value,quantity8.value,
+    quantity9.value,quantity10.value,quantity11.value
+  ].some(v => parseInt(v) > 0)
+
+  if(temProteina && !temCarbo){
+    alert("Escolha pelo menos um carboidrato.")
+    return
+  }
+
+  if(temCarbo && !temProteina){
+    alert("Escolha pelo menos uma proteína.")
+    return
+  }
+
+  totalMarmitasQty += qty
+  totalMarmitasValue += value
+
+  const names = [
+    "Peito de Frango Grelhado",
+    "Sobrecoxa Desfiada",
+    "Carne Moída com Molho",
+    "Proteína de Soja",
+    "Grão de Bico",
+    "Arroz Branco",
+    "Arroz Integral",
+    "Feijão",
+    "Macarrão",
+    "Macarrão Integral",
+    "Purê",
+    "Mix de Legumes"
   ]
 
-  let html=""
+  const vals = [
+    quantity1.value,quantity2.value,quantity3.value,quantity4.value,quantity5.value,
+    quantity6.value,quantity7.value,quantity8.value,quantity9.value,quantity10.value,
+    quantity11.value,quantity12.value
+  ]
+
+  let html = ""
   vals.forEach((v,i)=>{
-    if(v) html+=`<p>${names[i]}${i===9?` (${pureOption.value})`:""}: ${v}g</p>`
+    if(v){
+      html += `<p>${names[i]}${i===10 ? ` (${pureOption.value})` : ""}: ${v}g</p>`
+    }
   })
 
-  summaryItems.innerHTML+=`
+  summaryItems.innerHTML += `
     <div class="summary-item">
       ${html}
       <p>Quantidade: ${qty}</p>
@@ -86,18 +125,22 @@ function addMarmita(){
 
 function addSpecialDish(){
   const specials=[
-    special_panqueca_frango,special_panqueca_carne,
-    special_fricasse,special_escondidinho_carne,
+    special_panqueca_frango,
+    special_panqueca_carne,
+    special_fricasse,
+    special_escondidinho_carne,
     special_escondidinho_frango
   ]
 
   let added=false
+
   specials.forEach(s=>{
     if(s.value){
-      const[p,q]=s.value.split("|").map(Number)
+      const [p,q] = s.value.split("|").map(Number)
       totalSpecialValue += p
       totalSpecialQty += q
-      summaryItems.innerHTML+=`
+
+      summaryItems.innerHTML += `
         <div class="summary-item nodesc">
           <p>${s.previousElementSibling.textContent}</p>
           <p>Quantidade: ${q}</p>
@@ -110,7 +153,11 @@ function addSpecialDish(){
     }
   })
 
-  if(!added)return alert("Selecione um prato especial.")
+  if(!added){
+    alert("Selecione um prato especial.")
+    return
+  }
+
   moveDeliveryToEnd()
   updateTotal()
 }
@@ -127,10 +174,9 @@ function showRetirada(){
   entregaBox.style.display="none"
 }
 
-/* === CEP / TAXA AUTOMÁTICA === */
 cep.addEventListener("blur",()=>{
-  const c=cep.value.replace(/\D/g,"")
-  if(c.length!==8)return
+  const c = cep.value.replace(/\D/g,"")
+  if(c.length !== 8) return
 
   fetch(`https://viacep.com.br/ws/${c}/json/`)
     .then(r=>r.json())
@@ -139,47 +185,62 @@ cep.addEventListener("blur",()=>{
       bairro.value=d.bairro||""
       cidade.value=d.localidade||""
 
-      const fee=deliveryFees[d.bairro]
-      if(fee!==undefined){
-        deliveryFeeLabel.textContent=`Taxa de entrega: R$${fee.toFixed(2)}`
-      }else{
-        deliveryFeeLabel.textContent=`Taxa de entrega: confirmar`
-      }
+      const fee = deliveryFees[d.bairro]
+      deliveryFeeLabel.textContent = fee !== undefined
+        ? `Taxa de entrega: R$${fee.toFixed(2)}`
+        : "Taxa de entrega: confirmar"
+
       deliveryFeeLabel.style.display="block"
     })
 })
 
 function addEntrega(){
-  if(deliveryData) return alert("Remova a opção atual para alterar.")
+  if(deliveryData){
+    alert("Remova a opção atual para alterar.")
+    return
+  }
 
   const nome = clienteNome.value.trim()
   const b = bairro.value.trim()
-  const num = numero.value.trim() // pega o número
+  const num = numero.value.trim()
 
-  if(!nome || !b) return alert("Preencha nome e endereço.")
-  if(!num) return alert("Preencha o número.")
+  if(!nome || !b){
+    alert("Preencha nome e endereço.")
+    return
+  }
+
+  if(!num){
+    alert("Preencha o número.")
+    return
+  }
 
   const fee = deliveryFees[b] || 0
 
   deliveryData = {
-    type: "Entrega",
-    valor: fee,
-    texto: `Entrega<br>
-Nome: ${nome}<br>
-${rua.value}, ${num}<br>
-${b} - ${cidade.value}<br>
-Valor: R$${fee.toFixed(2)}`
+    type:"Entrega",
+    valor:fee,
+    texto:`Entrega<br>
+    Nome: ${nome}<br>
+    ${rua.value}, ${num}<br>
+    ${b} - ${cidade.value}<br>
+    Valor: R$${fee.toFixed(2)}`
   }
 
   renderDelivery()
 }
 
-
 function addRetirada(){
-  if(deliveryData)return alert("Remova a opção atual para alterar.")
-  if(!diaRetirada.value)return alert("Selecione o dia da retirada.")
+  if(deliveryData){
+    alert("Remova a opção atual para alterar.")
+    return
+  }
 
-  deliveryData={
+  if(!diaRetirada.value){
+    alert("Selecione o dia da retirada.")
+    return
+  }
+
+  deliveryData = {
     type:"Retirada",
     valor:0,
     texto:`Retirada<br>
@@ -196,7 +257,7 @@ function renderDelivery(){
     e.remove()
   })
 
-  summaryItems.innerHTML+=`
+  summaryItems.innerHTML += `
     <div class="summary-item ${deliveryData.type.toLowerCase()}">
       <p>${deliveryData.texto}</p>
       <button onclick="removeEntrega()">X</button>
@@ -231,8 +292,7 @@ function removeItem(btn,qty,val,isSpecial){
   if(isSpecial){
     totalSpecialValue -= val
     totalSpecialQty -= qty
-  }
-  else{
+  }else{
     totalMarmitasQty -= qty
     totalMarmitasValue -= val
   }
@@ -240,9 +300,13 @@ function removeItem(btn,qty,val,isSpecial){
 }
 
 function updateTotal(){
-  const m=applyDiscount(totalMarmitasValue,totalMarmitasQty)
+  const m = applyDiscount(totalMarmitasValue,totalMarmitasQty)
   totalItems.textContent = totalMarmitasQty + totalSpecialQty
-  totalValue.textContent=(m + totalSpecialValue + (deliveryData?deliveryData.valor:0)).toFixed(2)
+  totalValue.textContent = (
+    m +
+    totalSpecialValue +
+    (deliveryData ? deliveryData.valor : 0)
+  ).toFixed(2)
 }
 
 function clearMarmitaInputs(){
@@ -253,18 +317,24 @@ function clearMarmitaInputs(){
 }
 
 function sendOrder(){
-  if(totalMarmitasQty===0 && totalSpecialValue===0)
-    return alert("Adicione pelo menos um item.")
+  if(totalMarmitasQty===0 && totalSpecialValue===0){
+    alert("Adicione pelo menos um item.")
+    return
+  }
 
-  if(!deliveryData)
-    return alert("Escolha entrega ou retirada.")
+  if(!deliveryData){
+    alert("Escolha entrega ou retirada.")
+    return
+  }
 
   const items=document.querySelectorAll('.summary-item')
   let msg="Olá! Gostaria de fazer meu pedido:\n\n"
+
   items.forEach(i=>{
     i.querySelectorAll("p").forEach(p=>msg+=p.textContent+"\n")
     msg+="-----------------\n"
   })
+
   msg+=`Valor Total: R$${totalValue.textContent}`
   window.open(`https://wa.me/5548991750119?text=${encodeURIComponent(msg)}`)
 }
@@ -272,8 +342,9 @@ function sendOrder(){
 function Togglemode(){
   const html=document.documentElement
   const img=document.querySelector('.logo img')
+
   html.classList.toggle('light')
-  img.src=html.classList.contains('light')
+  img.src = html.classList.contains('light')
     ? "./assets/amor.png"
     : "./assets/amor (1).png"
 }
