@@ -271,18 +271,39 @@
                 <input type="text" id="cidade" placeholder="Cidade" disabled />
               </div>
             </div>
-            <div class="product" ;>
-              <label>Forma de pagamento</label>
-              <select
-                id="formaPagamento"
-                style="width: 49%; margin: 5px 0; font-size: 0.9em"
-              >
-                <option value="" disabled selected>Selecione</option>
-                <option value="Pix">Pix</option>
-                <option value="Débito">Débito</option>
-                <option value="Crédito">Crédito</option>
-              </select>
-            </div>
+            <div <div
+            class="product"
+            style="
+              background-color: var(--surface-color2);
+              border: 2px solid var(--border-color2);
+              border-radius: 12px;
+              padding: 10px 12px;
+              box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+              margin: 6px 0;
+            "
+          >
+            <label style="font-size:16px; font-weight: 900; color: var(--text-color);">
+              Forma de pagamento
+            </label>
+          
+            <select
+              id="formaPagamento"
+              style="
+                width: 49%;
+                margin: 5px 0;
+                font-size: 0.9em;
+                background-color: var(--input-color);
+                border: 1.5px solid var(--border-color2);
+                font-weight: bold;
+              "
+            >
+              <option value="" disabled selected>Selecione</option>
+              <option value="Pix">Pix</option>
+              <option value="Débito">Débito</option>
+              <option value="Crédito">Crédito</option>
+            </select>
+          </div>
+          
 
             <!-- 🔥 ÚNICA ADIÇÃO (NÃO QUEBRA CSS) -->
             <p
@@ -332,23 +353,62 @@
               </p>
             </div>
 
-            <div class="product">
-              <label>Dia da Retirada:</label>
-              <select id="diaRetirada" style="width: 49%; margin: 5px 0; font-size: 0.9em">
+            <div class="product" style="
+             background-color: var(--surface-color2);
+    border: 2px solid var(--border-color2);
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    margin: 6px 0;
+  ">
+              <label style="font-weight: 900; color: var(--text-color);">Dia da Retirada:</label>
+              <select id="diaRetirada"  style="
+              width: 49%;
+      margin: 5px 0;
+      font-size: 0.9em;
+      background-color: var(--input-color);
+      border: 1.5px solid var(--border-color2);
+      font-weight: bold;
+    ">
                 <option value="" disabled selected>Selecione</option>
                 <option value="Domingo">Domingo</option>
                 <option value="Segunda-feira">Segunda-feira</option>
               </select>
             </div>
-            <div class="product">
-              <label>Forma de pagamento</label>
-              <select id="formaPagamento2" style="width: 49%; margin: 5px 0; font-size: 0.9em">
-                <option value="" disabled selected>Selecione</option>
-                <option value="Pix">Pix</option>
-                <option value="Débito">Débito</option>
-                <option value="Crédito">Crédito</option>
-              </select>
-            </div>
+            <div
+  class="product"
+  style="
+    background-color: var(--surface-color2);
+    border: 2px solid var(--border-color2);
+    border-radius: 12px;
+    padding: 10px 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    margin: 6px 0;
+  "
+>
+  <label style="font-size:16px; font-weight: 900; color: var(--text-color);">
+    Forma de pagamento
+  </label>
+
+  <select
+    id="formaPagamento2"
+    style="
+      width: 49%;
+      margin: 5px 0;
+      font-size: 0.9em;
+      background-color: var(--input-color);
+      border: 1.5px solid var(--border-color2);
+      font-weight: bold;
+    "
+  >
+    <option value="" disabled selected>Selecione</option>
+    <option value="Pix">Pix</option>
+    <option value="Débito">Débito</option>
+    <option value="Crédito">Crédito</option>
+  </select>
+</div>
+
+
 
             <div style="text-align: center; margin-bottom: 10px">
               <button class="botao2" onclick="addRetirada()">Adicionar</button>
