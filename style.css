@@ -15,6 +15,7 @@
   --button-color: rgba(0, 0, 0, 0.6);
   --border-color2: rgba(0, 0, 0, 0.6);
   --surface-color: rgba(255, 255, 255, 0.5);
+  --surface-color2: rgba(255, 255, 255, 0.1);
   --surface-color-hover: rgba(0, 0, 0, 0.2);
   --switch-bg-url: url(./assets/moon.svg);
   --bg-hover-button: #5f6659;
@@ -31,6 +32,7 @@
   --descontoInf-color2: rgba(209, 208, 208, 0.479);
   --button-color: #709156;
   --surface-color: rgba(0, 0, 0, 0.08);
+  --surface-color2: rgba(0, 0, 0, 0.08);
   --surface-color-hover: rgba(0, 0, 0, 0.05);
   --switch-bg-url: url(./assets/Son.svg);
   --bg-hover-button: #aeca96;
