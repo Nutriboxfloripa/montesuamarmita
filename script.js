@@ -78,13 +78,13 @@ function addMarmita() {
     return;
   }
 
-  /* 🔒 AJUSTE 1 — PURÊ OBRIGATÓRIO */
+  // 🔒 Purê obrigatório
   if (quantity11.value && !pureOption.value) {
     alert("Selecione o tipo de purê.");
     return;
   }
 
-  /* 🔁 AJUSTE 2 — PROTEÍNA ↔ CARBOIDRATO */
+  // 🔁 Proteína ↔ Carboidrato
   const temProteina = [
     quantity1.value,
     quantity2.value,
@@ -148,9 +148,7 @@ function addMarmita() {
   let html = "";
   vals.forEach((v, i) => {
     if (v) {
-      html += `<p>${names[i]}${
-        i === 10 ? ` (${pureOption.value})` : ""
-      }: ${v}g</p>`;
+      html += `<p>${names[i]}${i === 10 ? ` (${pureOption.value})` : ""}: ${v}g</p>`;
     }
   });
 
@@ -251,9 +249,7 @@ function addEntrega() {
   const nome = clienteNome.value.trim();
   const b = bairro.value.trim();
   const num = numero.value.trim();
-
   const formaPagamentoEl = document.getElementById("formaPagamento");
-  const pagamento = formaPagamentoEl ? formaPagamentoEl.value.trim() : "";
 
   if (!nome || !b) {
     alert("Preencha nome e endereço.");
@@ -265,12 +261,12 @@ function addEntrega() {
     return;
   }
 
-  // 🔥 AGORA FUNCIONA SEM FALHA
-  if (!pagamento) {
+  if (!formaPagamentoEl || formaPagamentoEl.selectedIndex === 0) {
     alert("Preencha a forma de pagamento.");
     return;
   }
 
+  const pagamento = formaPagamentoEl.value;
   const fee = deliveryFees[b] || 0;
 
   deliveryData = {
@@ -297,7 +293,8 @@ function addRetirada() {
     alert("Selecione o dia da retirada.");
     return;
   }
-  if (!formaPagamento2.value) {
+
+  if (!formaPagamento2 || formaPagamento2.selectedIndex === 0) {
     alert("Selecione a forma de pagamento.");
     return;
   }
