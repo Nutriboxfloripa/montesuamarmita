@@ -211,7 +211,7 @@
         </button>
       </div>
       <!-- ENTREGA / RETIRADA -->
-       <div class="title2"><h1>ENTREGA</h1></div>
+      <div class="title2"><h1>ENTREGA</h1></div>
       <div class="base2">
         <div class="calc">
           <div class="product">
@@ -224,7 +224,11 @@
             <div class="row">
               <div class="field">
                 <label>Nome</label>
-                <input type="text" id="clienteNome" placeholder="Nome completo" />
+                <input
+                  type="text"
+                  id="clienteNome"
+                  placeholder="Nome completo"
+                />
               </div>
               <div class="field">
                 <label>CEP</label>
@@ -234,17 +238,26 @@
 
             <div class="field">
               <label>Rua</label>
-              <input type="text" id="rua" placeholder="Rua, Av, etc." disabled />
+              <input
+                type="text"
+                id="rua"
+                placeholder="Rua, Av, etc."
+                disabled
+              />
             </div>
 
             <div class="row">
               <div class="field">
                 <label>Número</label>
-                <input type="text" id="numero" placeholder="Numero"/>
+                <input type="text" id="numero" placeholder="Numero" />
               </div>
               <div class="field">
                 <label>Complemento</label>
-                <input type="text" id="complemento" placeholder="Ap, casa, CJ" />
+                <input
+                  type="text"
+                  id="complemento"
+                  placeholder="Ap, casa, CJ"
+                />
               </div>
             </div>
 
@@ -258,9 +271,29 @@
                 <input type="text" id="cidade" placeholder="Cidade" disabled />
               </div>
             </div>
+            <div class="product" ;>
+              <label>Forma de pagamento</label>
+              <select
+                id="formaPagamento"
+                style="width: 49%; margin: 5px 0; font-size: 0.9em"
+              >
+                <option value="" disabled selected>Selecione</option>
+                <option value="Pix">Pix</option>
+                <option value="Débito">Débito</option>
+                <option value="Crédito">Crédito</option>
+              </select>
+            </div>
 
             <!-- 🔥 ÚNICA ADIÇÃO (NÃO QUEBRA CSS) -->
-            <p id="deliveryFeeLabel" style="text-align:center;font-weight:bold;display:none; font-size: 1.5em;"></p>
+            <p
+              id="deliveryFeeLabel"
+              style="
+                text-align: center;
+                font-weight: bold;
+                display: none;
+                font-size: 1.5em;
+              "
+            ></p>
 
             <div style="text-align: center">
               <button class="botao2" onclick="addEntrega()">Adicionar</button>
@@ -270,30 +303,54 @@
           <!-- RETIRADA -->
           <div id="retiradaBox" style="display: none">
             <div class="delivery-address">
-              <p>
+              <p style="margin: 20px 0; text-align: center; font-size: 18px;">
                 R. Marcos Nunes Viêira, 89<br />
                 Saco dos Limões – Florianópolis/SC
               </p>
-              <p>
+              <p style="margin: 20px 0; text-align: center;">
                 <a
                   href="https://www.google.com/maps/dir//R.+Marcos+Nunes+Vi%C3%AAira,+89"
                   target="_blank"
+                  style="
+                    display: inline-block;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #1a73e8;
+                    text-decoration: none;
+                    padding: 10px 16px;
+                    border-radius: 8px;
+                    background-color: #f1f6ff;
+                    transition: all 0.2s ease;
+                  "
+                  onmouseover="this.style.backgroundColor='#e3efff'"
+                  onmouseout="this.style.backgroundColor='#f1f6ff'"
                 >
                   📍 Ver rota
                 </a>
+              </p>
+              
               </p>
             </div>
 
             <div class="product">
               <label>Dia da Retirada:</label>
-              <select id="diaRetirada">
+              <select id="diaRetirada" style="width: 49%; margin: 5px 0; font-size: 0.9em">
                 <option value="" disabled selected>Selecione</option>
                 <option value="Domingo">Domingo</option>
                 <option value="Segunda-feira">Segunda-feira</option>
               </select>
             </div>
+            <div class="product">
+              <label>Forma de pagamento</label>
+              <select id="formaPagamento2" style="width: 49%; margin: 5px 0; font-size: 0.9em">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Pix">Pix</option>
+                <option value="Débito">Débito</option>
+                <option value="Crédito">Crédito</option>
+              </select>
+            </div>
 
-            <div style="text-align: center; margin-bottom: 10px;">
+            <div style="text-align: center; margin-bottom: 10px">
               <button class="botao2" onclick="addRetirada()">Adicionar</button>
             </div>
           </div>
