@@ -34,7 +34,7 @@ const deliveryFees = {
   Tapera: 10,
   "Ribeirão da Ilha": 10,
   Carianos: 10,
-  Kobrasol: 10,
+  Kibrasol: 10,
 };
 
 /* ===================== MARMITAS ===================== */
